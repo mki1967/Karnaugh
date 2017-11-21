@@ -10,7 +10,9 @@ onload= function(){
 
 onInputDecimal= function(e){
     var value=e.target.value;
+    if( isNaN(value) ) return;
     decimalInput=value;
+    document.querySelector("#SpanDecimal").innerHTML="<code>"+decimalInput+"</code>";
     document.querySelector("#SpanOutput").innerHTML="<code>"+(Number(decimalInput).toString(Number(base)))+"</code>";
     document.querySelector("#SpanPrecise").innerHTML="<code>"+preciseString( decimalInput, Number(base)  )+"</code>";
 }
@@ -54,6 +56,7 @@ preciseString= function( decimalString, base ) {
 	var m= fractional*base;
 	fractional=m % denominator; // remaining fractional
 	out = out+(((m-fractional)/denominator).toString(Number(base))); // append digit
+	if(history.length>1000) return "TOO LONG ...";
     }
 
     var period="";
