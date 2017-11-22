@@ -10,7 +10,8 @@ onload= function(){
 
 onInputDecimal= function(e){
     var value=e.target.value;
-    if( isNaN(value) ) return;
+    if( isNaN(value) ) return; // protection against NaN
+    if( value.includes('e') || value.includes('E') ) return; // protection against scientific (exponent) notation
     decimalInput=value;
     document.querySelector("#SpanDecimal").innerHTML="<code>"+decimalInput+"</code>";
     document.querySelector("#SpanOutput").innerHTML="<code>"+(Number(decimalInput).toString(Number(base)))+"</code>";
